@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Historique{% endblock %}
+
+{% block content %}
+    <h1>Historique</h1>
+    <ul>
+        {% for credential in history %}
+            <li>
+                {% if credential.operation == "CREATE" %}
+                    Un nouveau mot de passe ({{ credential.password }}) pour le site {{ credential.url }} a été crée le {{ credential.created_at|date:"d b Y à h:i:s" }}
+                {% elif credential.operation == "UPDATE" %}
+                    Des informations concernant le mot de passe de {{ credential.site }} ont été modifié le {{ credential.created_at|date:"d b Y à h:i:s" }}
+                {% else %}
+                    Le mot de passe du site {{ credential.url }} a été supprimé le {{ credential.created_at|date:"d b Y à h:i:s" }}
+                {% endif %}
+            </li>
+        {% empty %}
+            <h2>Aucun historique disponible :(</h2>
+        {% endfor %}
+    </ul>
+{% endblock %}
