@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Item{% endblock %}
+
+{% block content %}
+<h2>Voir les items</h2>
+<ul>
+    {% for item in items %}
+        <li>
+            {{item.login}}
+            {{item.password}}
+            {{item.url}}
+            <p>Fin de la credential</p>
+        </li>
+    {% empty %}
+        <h2>Aucun item crée</h2>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -21,10 +21,13 @@ def createItem(request):
 
             form.cleaned_data["login"] = base64.b64encode(
                 form.cleaned_data["login"].encode())
+            form.cleaned_data["login"] = form.cleaned_data["login"].decode()
             form.cleaned_data["password"] = base64.b64encode(
                 form.cleaned_data["password"].encode())
+            form.cleaned_data["password"] = form.cleaned_data["password"].decode()
             form.cleaned_data["url"] = base64.b64encode(
                 form.cleaned_data["url"].encode())
+            form.cleaned_data["url"] = form.cleaned_data["url"].decode()
 
             credential_inst = Credential.objects.create(**form.cleaned_data)
             credential_inst.save()
