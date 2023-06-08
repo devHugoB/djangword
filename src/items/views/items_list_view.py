@@ -5,16 +5,16 @@ import base64
 
 
 @login_required
-def showItem(request):
+def listItems(request):
     user_credentials = Credential.objects.filter(user=request.user)
     for item in user_credentials:
         item.login = base64.b64decode(item.login).decode()
         item.password = base64.b64decode(item.password).decode()
         item.url = base64.b64decode(item.url).decode()
     context = {"items": user_credentials}
-    
+
     return render(
         request,
-        "items/show_item.html",
+        "items/items_list.html",
         context=context
     )
