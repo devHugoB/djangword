@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from ..forms.create_item_form import CreateItemForm
-from app.models.credential import Credential
-from app.models.history import History
+from app.models import Credential, History
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from .create_item_view import test_password_strength

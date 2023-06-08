@@ -11,6 +11,7 @@
             {{item.password}}
             {{item.url}}
             <a href="{% url 'items:update_item' item.id %}">Modifier</a>
+            <a href="{% url 'items:delete_item' item.id %}">Supprimer</a>
         </li>
     {% empty %}
         <h2>Aucun item créé</h2>
