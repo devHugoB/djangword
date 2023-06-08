@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
-
+from django.core.exceptions import ValidationError
+import base64
 
 class Credential(models.Model):
     user = models.ForeignKey(
@@ -14,3 +15,11 @@ class Credential(models.Model):
     security_index = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def validate_password(self, new_password):
+        new_password = base64.b64encode(new_password.encode())
+        new_password = new_password.decode()
+        if self.password == new_password:
+            raise ValidationError(
+                "You can not use your old password !"
+            )

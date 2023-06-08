@@ -14,9 +14,7 @@ def updateItem(request, item_id):
     item = get_object_or_404(Credential, pk=item_id)
     if request.method == 'POST':
         form = CreateItemForm(request.POST, instance=item)
-        print("ici")
         if form.is_valid():
-            print(form)
             item.security_index = test_password_strength(
                 form.cleaned_data["password"])
             item.login = base64.b64encode(
