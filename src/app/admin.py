@@ -4,6 +4,7 @@ from .models.history import History
 
 class CredentialAdmin(admin.ModelAdmin):
     list_display = (
+        "id",
         "user",
         "login",
         "password",
@@ -11,6 +12,7 @@ class CredentialAdmin(admin.ModelAdmin):
         "deleted",
         "security_index",
         "created_at",
+        "updated_at",
     )
 
     readonly_fields = (

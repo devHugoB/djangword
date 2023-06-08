@@ -7,6 +7,16 @@
 </head>
 <body>
   <main class="container">
+    <nav>
+      <ul>
+        <li><a href="{% url 'items:create_item' %}">Créer un item</a></li>
+        <li><a href="{% url 'items:items_list' %}">Voir ses items</a></li>
+        <li><a href="{% url 'history:history' %}">Voir l'hitorique de ses items</a></li>
+      </ul>
+      <ul>
+        <li><a href="{% url 'accounts:changedmymind' %}" >Changer son mot de passe</a></li>
+      </ul>
+    </nav>
     {% block content %}
     {% endblock %}
   </main>

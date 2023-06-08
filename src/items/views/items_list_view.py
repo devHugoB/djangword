@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from app.models import Credential
 from django.shortcuts import render
+from .update_item_view import decode_item
 import base64
 
 
@@ -8,9 +9,7 @@ import base64
 def listItems(request):
     user_credentials = Credential.objects.filter(user=request.user)
     for item in user_credentials:
-        item.login = base64.b64decode(item.login).decode()
-        item.password = base64.b64decode(item.password).decode()
-        item.url = base64.b64decode(item.url).decode()
+        item = decode_item(item)
     context = {"items": user_credentials}
 
     return render(

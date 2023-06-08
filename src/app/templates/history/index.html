@@ -10,7 +10,7 @@
                 {% if credential.operation == "CREATE" %}
                     Un nouveau mot de passe ({{ credential.password }}) pour le site {{ credential.url }} a été crée le {{ credential.created_at|date:"d b Y à h:i:s" }}
                 {% elif credential.operation == "UPDATE" %}
-                    Des informations concernant le mot de passe de {{ credential.site }} ont été modifié le {{ credential.created_at|date:"d b Y à h:i:s" }}
+                    Des informations concernant le mot de passe de {{ credential.url }} ont été modifié le {{ credential.created_at|date:"d b Y à h:i:s" }}
                 {% else %}
                     Le mot de passe du site {{ credential.url }} a été supprimé le {{ credential.created_at|date:"d b Y à h:i:s" }}
                 {% endif %}

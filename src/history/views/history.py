@@ -1,18 +1,18 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from app.models import Credential, History
+from items.views.update_item_view import decode_item
 
 
 @login_required
 def history(request):
-    user_credentials = Credential.objects.all().filter(user=request.user.id).order_by("-created_at")
+    user = request.user
+    histories = History.objects.filter(credential__user=user)
 
-    credentials_history = []
-    for credential in user_credentials:
-        credential_history = History.objects.get(credential=credential.id)
-        credentials_history.append(credential_history)
-
-    context = {"history": credentials_history}
+    for item in histories:
+        item = decode_item(item)
+        
+    context = {"history": histories}
 
     return render(
         request,
