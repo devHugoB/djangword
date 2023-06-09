@@ -7,6 +7,11 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
+    <a id="show-button">Afficher le mot de passe</a>
     <button type="submit">Update</button>
 </form>
+{% endblock %}
+{% block script %}
+{% load static %}
+<script src="{% static 'js/items/updateItem.js' %}"></script>
 {% endblock %}

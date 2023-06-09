@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from app.models import Credential
 from django.shortcuts import render
 from .update_item_view import decode_item
-import base64
+from django.http import JsonResponse
 
 
 @login_required
@@ -17,3 +17,8 @@ def listItems(request):
         "items/items_list.html",
         context=context
     )
+
+def showPassword(request, item_id):
+    user_credential = Credential.objects.get(pk=item_id)
+    user_credential = decode_item(user_credential)
+    return JsonResponse({"item_password": user_credential.password})
