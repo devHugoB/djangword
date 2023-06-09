@@ -12,3 +12,6 @@ class SharedCredential(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="received_credentials"
     )
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = (('credential', 'user_to'),)

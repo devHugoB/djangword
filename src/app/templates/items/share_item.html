@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Item{% endblock %}
+
+{% block content %}
+<h2>Partager un item</h2>
+<p>{{ item.url }}</p>
+<p>{{ item.login }}</p>
+<form method="post">
+    {% csrf_token %}
+    {% if error %}
+    <p style="color: #e53935">{{ error }}</p>
+    {% endif %}
+    {{ form.as_p }}
+    <button type="submit">Partager</button>
+</form>
+{% endblock %}
