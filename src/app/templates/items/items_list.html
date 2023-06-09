@@ -1,15 +1,24 @@
 {% extends 'base.html' %}
 
 {% block title %}Item{% endblock %}
-
 {% block content %}
-<h2>Voir les items</h2>
+{% load static %}
+<script src="{% static 'js/index.js' %}"></script>
 <ul>
     {% for item in items %}
         <li>
-            {{item.login}}
-            {{item.password}}
-            {{item.url}}
+            <p>{{item.login}}</p>
+            <p id="password-{{ item.id }}" data-password="{{ item.password }}">
+                {% for char in item.password %}
+                    {% if item.show_password %}
+                        {{ char }}
+                    {% else %}
+                        -
+                    {% endif %}
+                {% endfor %}
+            </p>
+            <a onclick="showPassword('{{ item.id|safe }}')">Afficher</a>
+            <p>{{item.url}}</p>
             <a href="{% url 'items:update_item' item.id %}">Modifier</a>
             <a href="{% url 'items:delete_item' item.id %}">Supprimer</a>
         </li>

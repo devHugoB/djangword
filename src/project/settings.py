@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     'accounts',
     'items',
+    'history'
 ]
 
 MIDDLEWARE = [
