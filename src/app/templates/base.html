@@ -10,7 +10,7 @@
   <main class="container">
     <nav>
       <ul>
-        <li><img style="max-width: 100px; margin-right: 50px;" src="{% static 'img/dj_logo.png' %}" alt="Logo de djangword"></li>
+        <li><a href="{% url 'home' %}"><img style="max-width: 100px; margin-right: 50px;" src="{% static 'img/dj_logo.png' %}" alt="Logo de djangword"></a></li>
         <li><a href="{% url 'items:create_item' %}">Créer un item</a></li>
         <li><a href="{% url 'items:items_list' %}">Voir ses items</a></li>
         <li><a href="{% url 'history:history' %}">Voir l'hitorique de ses items</a></li>
