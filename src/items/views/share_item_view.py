@@ -3,6 +3,7 @@ from app.models import Credential, SharedCredential
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 import base64
@@ -24,6 +25,9 @@ def shareItem(request, item_id):
                 user_to = User.objects.get(
                     username=form.cleaned_data["username"])
 
+                if user_to.id == request.user.id:
+                    raise PermissionDenied
+
                 shared_item = {
                     "credential": item,
                     "user_from": request.user,
@@ -32,6 +36,10 @@ def shareItem(request, item_id):
 
                 shared_item = SharedCredential.objects.create(**shared_item)
                 shared_item.save()
+
+            except PermissionDenied:
+                error = "Vous ne pouvez pas partager un item à vous même"
+                print(f"ERROR: {error}")
 
             except User.DoesNotExist:
                 error = "L'utilisateur n'existe pas"

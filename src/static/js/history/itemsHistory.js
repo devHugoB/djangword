@@ -1,27 +1,29 @@
-function showPassword(itemId, isHidden, passwordElement, buttonElement) {
+function showPassword(itemId, isHidden, passwordElement, iconElement) {
     if (isHidden) {
         fetch(`/history/show_password/${itemId}`).then(
             r => r.json()
         ).then(
             data => {
                 passwordElement.textContent = data.item_password;
-                buttonElement.textContent = "Cacher"
+                iconElement.classList.remove("fa-eye")
+                iconElement.classList.add("fa-eye-slash")
             }
         )
     } else {
         passwordElement.textContent = "••••••••••";
-        buttonElement.textContent = "Afficher"
+        iconElement.classList.remove("fa-eye-slash")
+        iconElement.classList.add("fa-eye")
     }
 }
 
 
-const buttons = document.querySelectorAll(".button")
-buttons.forEach(button => {
+const icons = document.querySelectorAll(".button")
+icons.forEach(icon => {
     let isHidden = true
-    const id = button.parentElement.dataset.id
+    const id = icon.parentElement.dataset.id
     const password = document.querySelector(`[data-id='${id}']`).querySelector('.password')
-    button.addEventListener("click", () => {
-        showPassword(id, isHidden, password, button)
+    icon.addEventListener("click", () => {
+        showPassword(id, isHidden, password, icon)
         isHidden = !isHidden
     })
 })

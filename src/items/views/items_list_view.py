@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from app.models import Credential
+from app.models import Credential, SharedCredential
 from django.shortcuts import render
 from .update_item_view import decode_item
 from django.http import JsonResponse
@@ -8,15 +8,24 @@ from django.http import JsonResponse
 @login_required
 def listItems(request):
     user_credentials = Credential.objects.filter(user=request.user)
+    user_shared_credentials = SharedCredential.objects.filter(
+        user_to=request.user)
+
     for item in user_credentials:
         item = decode_item(item)
-    context = {"items": user_credentials}
+
+    for item in user_shared_credentials:
+        item.credential = decode_item(item.credential)
+
+    context = {"credentials": user_credentials,
+               "shared_credentials": user_shared_credentials}
 
     return render(
         request,
         "items/items_list.html",
         context=context
     )
+
 
 def showPassword(request, item_id):
     user_credential = Credential.objects.get(pk=item_id)

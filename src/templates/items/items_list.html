@@ -2,23 +2,39 @@
 
 {% block title %}Item{% endblock %}
 {% block content %}
+<h2>Liste des mots de passe</h2>
 <ul>
-    {% for item in items %}
+    {% for item in credentials %}
     <li data-id="{{item.id}}">
-        <p>{{item.login}}</p>
-        <p class="password">••••••••••</p>
-        <a class="button">Afficher</a>
+        <span>{{item.login}}</span>
+        <span class="password">••••••••••</span>
+        <i class="fa-solid fa-eye button"></i>
         {{item.url}}
-        <a href="{% url 'items:update_item' item.id %}">Modifier</a>
-        <a href="{% url 'items:delete_item' item.id %}">Supprimer</a>
-        <a href="{% url 'items:share_item' item.id %}">Partager</a>
+        <a href="{% url 'items:update_item' item.id %}"><i class="fa-solid fa-pen"></i></a>
+        <a href="{% url 'items:delete_item' item.id %}"><i class="fa-solid fa-trash"></i></a>
+        <a href="{% url 'items:share_item' item.id %}"><i class="fa-solid fa-share"></i></a>
     </li>
     {% empty %}
     <h2>Aucun item créé</h2>
     {% endfor %}
 </ul>
+<h2>Liste des mots de passe partagés</h2>
+{% for item in shared_credentials %}
+<li data-id="{{item.credential.id}}">
+    <span>{{item.credential.login}}</span>
+    <span class="password">••••••••••</span>
+    <i class="fa-solid fa-eye button"></i>
+    {{item.credential.url}}
+    partagé par
+    {{ item.user_from.username }}
+    -
+    {{ item.created_at }}
+</li>
+{% empty %}
+<h2>Aucun item créé</h2>
+{% endfor %}
 {% endblock %}
 {% block script %}
 {% load static %}
-<script src="{ static 'js/items/itemsList.js' }"></script>
+<script src="{% static 'js/items/itemsList.js' %}"></script>
 {% endblock %}
