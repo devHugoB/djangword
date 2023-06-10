@@ -10,7 +10,6 @@ def sharedItems(request):
 
     for item in shared_items:
         item.credential = decode_item(item.credential)
-        print(item.credential.url)
 
     return render(
         request,
