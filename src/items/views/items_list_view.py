@@ -3,6 +3,7 @@ from app.models import Credential, SharedCredential
 from django.shortcuts import render
 from .update_item_view import decode_item
 from django.http import JsonResponse
+from datetime import datetime
 
 
 @login_required
@@ -19,6 +20,8 @@ def listItems(request):
 
     context = {"credentials": user_credentials,
                "shared_credentials": user_shared_credentials}
+
+    print(f"[{datetime.now()}] [{request.user}] DEBUG - Affichage des items")
 
     return render(
         request,

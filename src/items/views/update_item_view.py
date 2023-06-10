@@ -5,7 +5,9 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from .create_item_view import test_password_strength
 from django.http import HttpResponseRedirect
+from datetime import datetime
 import base64
+
 
 @login_required
 @require_http_methods(["GET", "POST"])
@@ -35,8 +37,12 @@ def updateItem(request, item_id):
                        "operation": "UPDATE"}
             hist_inst = History.objects.create(**history)
             hist_inst.save()
-            return HttpResponseRedirect(f"/items/items_list/")
+            print(
+                f"[{datetime.now()}] [{request.user}] DEBUG - Modification d'un item")
+            return HttpResponseRedirect("/items/items_list/")
     else:
+        print(
+            f"[{datetime.now()}] [{request.user}] DEBUG - Affichage de la page de modification d'item")
         item = decode_item(item)
         form = CreateItemForm(instance=item)
 
@@ -45,6 +51,7 @@ def updateItem(request, item_id):
         "items/update_item.html",
         context={"form": form}
     )
+
 
 def decode_item(item):
     item.login = base64.b64decode(item.login).decode()

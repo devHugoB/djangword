@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from string import punctuation
+from datetime import datetime
 import base64
 
 
@@ -41,8 +42,12 @@ def createItem(request):
             hist_inst = History.objects.create(**history)
             hist_inst.save()
 
+            print(f"[{datetime.now()}] [{request.user}] DEBUG - Création d'un item")
+
             return HttpResponseRedirect("/items/create_item")
     else:
+        print(
+            f"[{datetime.now()}] [{request.user}] DEBUG - Affichage de la page de création d'item")
         form = CreateItemForm()
 
     return render(

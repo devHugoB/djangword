@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.views.decorators.http import require_http_methods
 
 from accounts.forms import ChangeUsernameForm
+from datetime import datetime
 
 
 @login_required
@@ -15,13 +16,16 @@ def changeUsername(request):
             user = request.user
             user.username = form.cleaned_data["username"]
             user.save()
+            print(f"[{datetime.now()}] [{request.user}] DEBUG - Changement du nom d'utilisateur")
 
             return HttpResponseRedirect("/")
     else:
+        print(
+            f"[{datetime.now()}] [{request.user}] DEBUG - Affichage de la page de changement de nom d'utilisateur")
         form = ChangeUsernameForm()
 
     return render(
-            request,
-            "registration/changedmymind.html",
-            context={"form": form}
+        request,
+        "registration/changedmymind.html",
+        context={"form": form}
     )

@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from datetime import datetime
 import base64
 
 
@@ -39,19 +40,23 @@ def shareItem(request, item_id):
 
             except PermissionDenied:
                 error = "Vous ne pouvez pas partager un item à vous même"
-                print(f"ERROR: {error}")
+                print(f"[{datetime.now()}] [{request.user}] ERROR - {error}")
 
             except User.DoesNotExist:
                 error = "L'utilisateur n'existe pas"
-                print(f"ERROR: {error}")
+                print(f"[{datetime.now()}] [{request.user}] ERROR - {error}")
 
             except Exception:
                 error = "Mot de passe déjà partagé à cet utilisateur"
-                print(f"ERROR: {error}")
+                print(f"[{datetime.now()}] [{request.user}] ERROR - {error}")
 
             else:
+                print(
+                    f"[{datetime.now()}] [{request.user}] DEBUG - Partage d'un mot de passe de l'utilisateur {request.user.username} à {user_to.username}")
                 return HttpResponseRedirect("/items/items_list/")
     else:
+        print(
+            f"[{datetime.now()}] [{request.user}] DEBUG - Affichage de la page de partage de mot de passe")
         form = ShareItemForm()
 
     return render(
