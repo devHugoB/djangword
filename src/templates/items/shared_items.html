@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Shared items{% endblock %}
+
+{% block content %}
+<h2>Liste des mot de passes partagés</h2>
+<ul>
+    {% for item in items %}
+    <li key="{{ item.id }}">
+        [{{ item.created_at }}] <b>{{ item.credential.url }} - {{ item.credential.login }}</b> partagé à
+        <b>{{ item.user_to.username }}</b>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
