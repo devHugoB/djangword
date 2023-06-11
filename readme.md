@@ -13,8 +13,8 @@ Mot de passe : LinuxAir11
 
 ## Fonctionnalités :
 
-Voir ses mots de passe : http://127.0.0.1:8000/items/items_list/
-Créer un mot de passe : http://127.0.0.1:8000/items/create_item/
-Voir les mots de passe partagés : http://127.0.0.1:8000/items/shared_items
-Voir l'historique : http://127.0.0.1:8000/history/
+Voir ses mots de passe : http://127.0.0.1:8000/items/items_list/  
+Créer un mot de passe : http://127.0.0.1:8000/items/create_item/  
+Voir les mots de passe partagés : http://127.0.0.1:8000/items/shared_items  
+Voir l'historique : http://127.0.0.1:8000/history/  
 Partager un mot de passe avec l'utilisateur "MaxBlanch"
