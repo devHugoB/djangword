@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .create_item_view import test_password_strength
 from django.http import HttpResponseRedirect
 from datetime import datetime
+from django.http import JsonResponse
 import base64
 
 
@@ -13,6 +14,9 @@ import base64
 @require_http_methods(["GET", "POST"])
 def updateItem(request, item_id):
     item = get_object_or_404(Credential, pk=item_id)
+    if not item.can_read_password(request.user):
+        return JsonResponse({"error": "You can not access to this password"}, status=403)
+    
     if request.method == 'POST':
         form = CreateItemForm(request.POST, instance=item)
         if form.is_valid():

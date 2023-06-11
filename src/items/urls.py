@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import createItem, listItems, updateItem, deleteItem, showPassword, shareItem, sharedItems
+from .views import createItem, listItems, updateItem, deleteItem, showPassword, shareItem, sharedItems, delete_item_shared
 
 app_name = "items"
 
@@ -11,5 +11,6 @@ urlpatterns = [
     path("update_item/<int:item_id>", updateItem, name="update_item"),
     path("delete_item/<int:item_id>", deleteItem, name="delete_item"),
     path("show_password/<int:item_id>", showPassword, name="show_password"),
-    path("shared_items", sharedItems, name="shared_items")
+    path("shared_items", sharedItems, name="shared_items"),
+    path("shared_item/<int:shared_item_id>", delete_item_shared, name='delete_item_shared'),
 ]

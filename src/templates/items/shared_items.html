@@ -3,12 +3,16 @@
 {% block title %}Shared items{% endblock %}
 
 {% block content %}
-<h2>Liste des mot de passes partagés</h2>
+<h2>Liste des mots de passe partagés</h2>
 <ul>
     {% for item in items %}
-    <li key="{{ item.id }}">
+    <li>
         [{{ item.created_at }}] <b>{{ item.credential.url }} - {{ item.credential.login }}</b> partagé à
         <b>{{ item.user_to.username }}</b>
+        <!-- Bouton de suppression du partage -->
+        {% if item.user_from == request.user %}
+        <a href="{% url 'items:delete_item_shared' item.id %}"><i class="fa-solid fa-trash"></i></a>
+        {% endif %}
     </li>
     {% endfor %}
 </ul>
