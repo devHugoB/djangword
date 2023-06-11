@@ -7,8 +7,8 @@ Exécutez ```pip install -r requirements.txt pour installer les dépendances```
 Allez dans le dossier src
 Exécutez ```python manage.py runserver 8000 pour lancer le serveur```  
 
-Connectez-vous à l'URL http://127.0.0.1:8000/accounts/login/
-Identifiant : Linus
+Connectez-vous à l'URL http://127.0.0.1:8000/accounts/login/  
+Identifiant : Linus  
 Mot de passe : LinuxAir11
 
 ## Fonctionnalités :
