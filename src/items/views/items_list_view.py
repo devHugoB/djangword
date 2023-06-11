@@ -33,4 +33,9 @@ def listItems(request):
 def showPassword(request, item_id):
     user_credential = Credential.objects.get(pk=item_id)
     user_credential = decode_item(user_credential)
+
+    if not user_credential.can_read_password(request.user):
+        return JsonResponse({"error": "You can not read this password"}, status=403)
+
+
     return JsonResponse({"item_password": user_credential.password})

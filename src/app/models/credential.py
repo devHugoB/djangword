@@ -23,3 +23,10 @@ class Credential(models.Model):
             raise ValidationError(
                 "You can not use your old password !"
             )
+
+    def can_read_password(self, user):
+        if user.has_perm('app.view_credential_password') == True:
+            return True
+        else:
+            return self.sharedcredential_set.filter(user_to=user).exists()
+    
